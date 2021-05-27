@@ -5,4 +5,8 @@ mongoClient.connect("mongodb://localhost", { useUnifiedTopology: true })
     .then(conn => global.conn = conn.db("workshoptdc"))
     .catch(err => console.log(err))
 
-module.exports = {}
+function findAll() {
+    return global.conn.collection("customers").find().toArray();
+}
+
+module.exports = { findAll }

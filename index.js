@@ -7,14 +7,14 @@ let bodyParser = require('body-parser');
 // Import Mongoose
 let mongoose = require('mongoose');
 // Import routes
-let apiRoutes = require("./api-routes");
+let apiRoutes = require("./routes/api-routes");
 
 //  ------------------------------------------------
 
 // Initializing
-
 // Initialize the app
 let app = express();
+
 
 // Use Api routes in the App
 app.use('/api', apiRoutes)
