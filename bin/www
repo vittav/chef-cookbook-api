@@ -5,7 +5,6 @@
 
 // Load the db module and store it in a global variable
 global.db = require('../db');
-
 var app = require('../app');
 var debug = require('debug')('food-solution:server');
 var http = require('http');

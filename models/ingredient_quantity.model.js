@@ -17,7 +17,7 @@ let ingredientQuantitySchema = mongoose.Schema({
 })
 
 // Export Recipe model
-let IngredientQuantity = module.exports = mongoose.model('IngredientQuantity', ingredientQuantitySchema)
+let IngredientQuantity = module.exports = mongoose.model('ingredientQuantities', ingredientQuantitySchema)
 
 module.exports.get = function (callback, limit) {
     IngredientQuantity.find(callback).limit(limit)

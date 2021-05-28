@@ -17,7 +17,7 @@ let stepSchema = mongoose.Schema({
 })
 
 // Export Recipe model
-let Step = module.exports = mongoose.model('Step', istepSchema)
+let Step = module.exports = mongoose.model('steps', stepSchema)
 
 module.exports.get = function (callback, limit) {
     Step.find(callback).limit(limit)

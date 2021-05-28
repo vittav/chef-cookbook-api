@@ -1,12 +1,22 @@
-// Load mongoClient object
-const mongoClient = require("mongodb").MongoClient;
-// Connect to localhost db (standard port: 27017)
-mongoClient.connect("mongodb://localhost", { useUnifiedTopology: true })
-    .then(conn => global.conn = conn.db("workshoptdc"))
-    .catch(err => console.log(err))
+let mongoose = require('mongoose');
 
-function findAll() {
-    return global.conn.collection("customers").find().toArray();
+const server = '127.0.0.1:27017';
+const database = 'tagme'; 
+
+class Database {
+    constructor() {
+        this._connect()
+    }
+
+    _connect() {
+        mongoose.connect(`mongodb://${server}/${database}`)
+            .then(() => {
+                console.log('Database connection successful')
+            })
+            .catch(err => {
+                console.error('Database connection error')
+            })
+    }
 }
 
-module.exports = { findAll }
+module.exports = new Database()

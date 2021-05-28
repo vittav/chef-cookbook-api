@@ -27,7 +27,7 @@ let recipeSchema = mongoose.Schema({
 })
 
 // Export Recipe model
-let Recipe = module.exports = mongoose.model('Recipe', recipeSchema)
+let Recipe = module.exports = mongoose.model('recipes', recipeSchema)
 
 module.exports.get = function(callback, limit) {
     Recipe.find(callback).limit(limit)

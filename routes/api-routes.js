@@ -11,6 +11,7 @@ router.get('/', function (req, res) {
 
 // Import contact controller
 let recipeController = require('../controllers/recipe.controller');
+let userController = require('../controllers/user.controller');
 
 // Contact routes
 router.route('/recipes')
@@ -19,5 +20,8 @@ router.route('/recipes')
 router.route('/recipes/:recipe_id')
     .get(recipeController.view)
 
+router.route('/users')
+    .get(userController.index)
+    
 // Export API routes
 module.exports = router;
