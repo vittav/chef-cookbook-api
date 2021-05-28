@@ -3,7 +3,7 @@ const userModel = require('../models/user.model')
 
 
 exports.index = function (req, res) {
-    userModel.get(function (err, users) {
+    userModel.find(function (err, users) {
         if (err) {
             res.json({
                 status: "error",
