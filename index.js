@@ -3,11 +3,11 @@
 // Import express
 let express = require('express')
 // Import Mongoose
-let mongoose = require('mongoose');
+require('mongoose');
 // Import routes
 let apiRoutes = require("./routes/api-routes");
 // Import and initialize db
-let db = require("./db");
+require("./db");
 
 //  ------------------------------------------------
 

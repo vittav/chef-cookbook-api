@@ -12,7 +12,7 @@ let stepSchema = mongoose.Schema({
     },
     recipe:
     {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Recipe'
+        type: mongoose.Schema.Types.ObjectId, ref: 'recipes'
     }
 })
 

@@ -16,12 +16,12 @@ let recipeSchema = mongoose.Schema({
     },
     ingredients: [
         {
-            type: mongoose.Schema.Types.ObjectId, ref:'Ingredient'
+            type: mongoose.Schema.Types.ObjectId, ref: 'ingredients'
         }
     ],
     steps: [
         {
-            type: mongoose.Schema.Types.ObjectId, ref:'Step'
+            type: mongoose.Schema.Types.ObjectId, ref: 'steps'
         }
     ]
 })
