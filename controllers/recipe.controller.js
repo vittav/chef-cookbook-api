@@ -1,9 +1,9 @@
 // Import recipe model
-Recipe = require('../models/recipe.model')
+const Recipe = require('../models/recipe.model')
 
 // Handle index actions
 exports.index = function (req, res) {
-    Recipe.get(function (err, recipes) {
+    Recipe.find().exec(function (err, recipes) {
         if (err) {
             res.json({
                 status: "error",
