@@ -22,6 +22,9 @@ router.route('/recipes/:recipe_id')
 
 router.route('/users')
     .get(userController.index)
+
+router.route('/login')
+    .post(userController.login)
     
 // Export API routes
 module.exports = router;

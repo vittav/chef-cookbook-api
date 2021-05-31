@@ -44,7 +44,7 @@ exports.view = function (req, res) {
             data: recipe
         });
     })
-
+}
 
 
 
@@ -55,5 +55,4 @@ exports.view = function (req, res) {
     //         data: recipe
     //     });
     // });
-}
 

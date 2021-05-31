@@ -2,12 +2,16 @@
 
 // Import express
 let express = require('express')
+let cors = require('cors');
+const bodyParser = require('body-parser')
 // Import Mongoose
 require('mongoose');
 // Import routes
 let apiRoutes = require("./routes/api-routes");
 // Import and initialize db
 require("./db");
+
+
 
 //  ------------------------------------------------
 
@@ -16,6 +20,10 @@ require("./db");
 // Initialize the app
 let app = express();
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(cors());
 // Use Api routes in the App
 app.use('/api', apiRoutes)
 
