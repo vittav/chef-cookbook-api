@@ -78,7 +78,7 @@ async function seedDB() {
 
         console.log("Done")
         
-        
+
         
         // Criando os passos e associando às receitas
         console.log("Creating steps and Adding to the recipes...")
@@ -95,12 +95,12 @@ async function seedDB() {
             { number: 6, description: "Depois temos o Arroz de Marisco Tradicional que leva todo o tipo marisco, desde sapateira, lagosta, mexilhões e etc", recipe: arrozDeMariscos.map(record => record._id)}
         ]
 
-            
+        
         conn.collection("steps").insertMany(firstRecipeSteps, function (err, r) {
             if (err) throw err;
         })
-
-
+        
+        
         // Creating the relationship between steps and the recipe
         const receitaUm = await Recipe.findOne({ name: "Arroz de Mariscos para 2 pessoas"})
         const receitaUmPassos = await Step.find({recipe: receitaUm});
@@ -108,8 +108,8 @@ async function seedDB() {
             receitaUm.steps.push(step);
         })
         receitaUm.save();
-
-
+        
+        
         // ---------------------------------------------------------
         // Steps da segunda Receita
         // ---------------------------------------------------------
@@ -121,13 +121,13 @@ async function seedDB() {
             { number: 5, description: "Cubra com o molho já com o camarão.", recipe: moquecaTropical.map(record => record._id)},
             { number: 6, description: "Leve ao forno por 20 minutos.", recipe: moquecaTropical.map(record => record._id)}
         ]
-
-            
+        
+        
         conn.collection("steps").insertMany(secondRecipeSteps, function (err, r) {
             if (err) throw err;
         })
-
-
+        
+        
         // Creating the relationship between steps and the recipe
         const receitaDois = await Recipe.findOne({ name: "Moqueca Tropical"})
         const receitaDoisPassos = await Step.find({recipe: receitaDois});
@@ -135,8 +135,8 @@ async function seedDB() {
             receitaDois.steps.push(step);
         })
         receitaDois.save();
-
-
+        
+        
         // ---------------------------------------------------------
         // Steps da Terceira Receita
         // ---------------------------------------------------------
@@ -148,13 +148,13 @@ async function seedDB() {
             { number: 5, description: "Apague o lume, junte as delícias cortadas em cubinhos e polvilhe com coentros picados. Sirva de seguida.", recipe: frutosDoMarAoAzeiteDeErvas.map(record => record._id)},
             { number: 6, description: "Selar os camarões, repita o processo com a lula e acabou!", recipe: frutosDoMarAoAzeiteDeErvas.map(record => record._id)}
         ]
-
-            
+        
+        
         conn.collection("steps").insertMany(thirdRecipeSteps, function (err, r) {
             if (err) throw err;
         })
-
-
+        
+        
         // Creating the relationship between steps and the recipe
         const receitaTres = await Recipe.findOne({ name: "Frutos do Mar ao Azeite de Ervas"})
         const receitaTresPassos = await Step.find({recipe: receitaTres});
@@ -162,8 +162,8 @@ async function seedDB() {
             receitaTres.steps.push(step);
         })
         receitaTres.save();
-
-
+        
+        
         // ---------------------------------------------------------
         // Steps da Quarta Receita
         // ---------------------------------------------------------
@@ -175,13 +175,13 @@ async function seedDB() {
             { number: 5, description: "Apague o lume, junte as delícias cortadas em cubinhos e polvilhe com coentros picados. Sirva de seguida.", recipe: massaEspagueteAItaliana.map(record => record._id)},
             { number: 6, description: "Polvilhe o queijo ralado e sirva a seguir.", recipe: massaEspagueteAItaliana.map(record => record._id)}
         ]
-
-            
+        
+        
         conn.collection("steps").insertMany(fourthRecipeSteps, function (err, r) {
             if (err) throw err;
         })
-
-
+        
+        
         // Creating the relationship between steps and the recipe
         const receitaQuatro = await Recipe.findOne({ name: "Massa espaguete à Italiana"})
         const receitaQuatroPassos = await Step.find({recipe: receitaQuatro});
@@ -189,7 +189,7 @@ async function seedDB() {
             receitaQuatro.steps.push(step);
         })
         receitaQuatro.save();
-
+        
         // ---------------------------------------------------------
         // Steps da Quinta Receita
         // ---------------------------------------------------------
@@ -201,13 +201,13 @@ async function seedDB() {
             { number: 5, description: "Adicione as 2 latas de pomarola, o cheiro-verde, o pimentão e deixe cozinhar por alguns minutos.", recipe: boboDeLagosta.map(record => record._id)},
             { number: 6, description: "Junte na mesma panela, a mandioca batida no liquidificador, outro vidro de leite de coco e o azeite de dendê. Deixe levantar fervura e está pronto.", recipe: boboDeLagosta.map(record => record._id)}
         ]
-
-            
+        
+        
         conn.collection("steps").insertMany(fifthRecipeSteps, function (err, r) {
             if (err) throw err;
         })
-
-
+        
+        
         // Creating the relationship between steps and the recipe
         const receitaCinco = await Recipe.findOne({ name: "Bobó de Lagosta"})
         const receitaCincoPassos = await Step.find({recipe: receitaCinco});
@@ -218,13 +218,31 @@ async function seedDB() {
         console.log("Done");
 
 
+        // ----------------------------
+        // Criando os Chefs
+        // ----------------------------
+        console.log("Creating the Chefs...")
+        const users = [
+            { name: "Chef Fogaça", email: "fogaca@cocobambu.com", password: "12345678" },
+            { name: "Chef Jaquin", email: "jaquin@cocobambu.com", password: "12345678" },
+            { name: "Chef Paola", email: "paola@cocobambu.com", password: "12345678" }
+        ];
+        conn.collection("users").insertMany(users, function (err, r) {
+            if (err) throw err;
+            console.log("Chefs created:")
+            console.log(r.ops)
+        })
+
+        console.log("Done")
+        
+        
         // Creating the ingredients and their relationship with recipes
         console.log("Adding the ingredients to the recipes...")
-
+        
         // ---------------------------------------------------------
         // Ingredients da Primeira Receita
         // ---------------------------------------------------------
-
+        
         const firstRecipeIngredients = [
             { name: "1 cebola", recipe: arrozDeMariscos.map(record => record._id) },
             { name: "2 dentes de alho", recipe: arrozDeMariscos.map(record => record._id) },
@@ -236,26 +254,27 @@ async function seedDB() {
             { name: "1 chávena de arroz", recipe: arrozDeMariscos.map(record => record._id) },
             { name: "1 porção de coentros", recipe: arrozDeMariscos.map(record => record._id) }
         ]
-
-        conn.collection("ingredients").insertMany(firstRecipeIngredients, function (err, r) {
+        
+        conn.collection("ingredients").insertMany(firstRecipeIngredients, async function (err, r) {
             if (err) throw err;
+            // Object.values(r.insertedIds).forEach(ingredient =>))
+            const receitaUmIngredientes = await Ingredient.find({recipe: receitaUm});
+            receitaUmIngredientes.forEach(ingredient => {
+                receitaUm.ingredients.push(ingredient);
+            });
+            receitaUm.save();
         });
+
+
+        
 
         // Creating the relationship between steps and the recipe
-        const receitaUmIngredientes = await Ingredient.find({ recipe: receitaUm });
-        console.log(receitaUmIngredientes);
-        receitaUmIngredientes.forEach(ingredient => {
-            receitaUm.ingredients.push(ingredient);
-        });
-        receitaUm.save();
-
-
-
-
+        
+               
         // ---------------------------------------------------------
         // Ingredients da Segunda Receita
         // ---------------------------------------------------------
-
+        
         const secondRecipeIngredients = [
             { name: "2 kg de robalo cortado em postas com couro", recipe: moquecaTropical.map(record => record._id)},
             { name: "4 cebolas grandes", recipe: moquecaTropical.map(record => record._id)},
@@ -269,22 +288,22 @@ async function seedDB() {
             { name: "1kg de camarão descascado", recipe: moquecaTropical.map(record => record._id)},
             { name: "Sal (à gosto)", recipe: moquecaTropical.map(record => record._id)}
         ]
-
-        conn.collection("ingredients").insertMany(secondRecipeIngredients, function(err, r) {
+        
+        conn.collection("ingredients").insertMany(secondRecipeIngredients, async function(err, r) {
             if (err) throw err;
+            // Creating the relationship between steps and the recipe
+            const receitaDoisIngredientes = await Ingredient.find({recipe: receitaDois});
+            receitaDoisIngredientes.forEach(ingredient => {
+                receitaDois.ingredients.push(ingredient);
+            });
+            receitaDois.save();
         });
         
-        // Creating the relationship between steps and the recipe
-        const receitaDoisIngredientes = await Ingredient.find({recipe: receitaDois});
-        receitaDoisIngredientes.forEach(ingredient => {
-            receitaDois.ingredients.push(ingredient);
-        });
-        receitaDois.save();
-
+        
         // ---------------------------------------------------------
         // Ingredients da Terceira Receita
         // ---------------------------------------------------------
-
+        
         const thirdRecipeIngredients = [
             { name: "250 gr fettuccine", recipe: frutosDoMarAoAzeiteDeErvas.map(record => record._id)},
             { name: "250 gr lula", recipe: frutosDoMarAoAzeiteDeErvas.map(record => record._id)},
@@ -298,23 +317,23 @@ async function seedDB() {
             { name: "1 maço de manjericão ", recipe: frutosDoMarAoAzeiteDeErvas.map(record => record._id)},
             { name: "30 gr manteiga ", recipe: frutosDoMarAoAzeiteDeErvas.map(record => record._id)}
         ]
-
-        conn.collection("ingredients").insertMany(thirdRecipeIngredients, function(err, r) {
+        
+        conn.collection("ingredients").insertMany(thirdRecipeIngredients, async function(err, r) {
             if (err) throw err;
+            // Creating the relationship between steps and the recipe
+            const receitaTresIngredientes = await Ingredient.find({recipe: receitaTres});
+            receitaTresIngredientes.forEach(ingredient => {
+                receitaTres.ingredients.push(ingredient);
+            });
+            receitaTres.save();
         });
         
-        // Creating the relationship between steps and the recipe
-        const receitaTresIngredientes = await Ingredient.find({recipe: receitaTres});
-        receitaTresIngredientes.forEach(ingredient => {
-            receitaTres.ingredients.push(ingredient);
-        });
-        receitaTres.save();
-
-
+        
+        
         // ---------------------------------------------------------
         // Ingredients da Quarta Receita
         // ---------------------------------------------------------
-
+        
         const fourthRecipeIngredients = [
             { name: "200 gr Espaguete", recipe: massaEspagueteAItaliana.map(record => record._id)},
             { name: "6 unidades de vieira ", recipe: massaEspagueteAItaliana.map(record => record._id)},
@@ -325,23 +344,23 @@ async function seedDB() {
             { name: "1 maço de tomilho ", recipe: massaEspagueteAItaliana.map(record => record._id)},
             { name: "30 gr manteiga ", recipe: massaEspagueteAItaliana.map(record => record._id)},
         ]
-
-        conn.collection("ingredients").insertMany(fourthRecipeIngredients, function(err, r) {
+        
+        conn.collection("ingredients").insertMany(fourthRecipeIngredients, async function(err, r) {
             if (err) throw err;
+            // Creating the relationship between steps and the recipe
+            const receitaQuatroIngredientes = await Ingredient.find({recipe: receitaQuatro});
+            receitaQuatroIngredientes.forEach(ingredient => {
+                receitaQuatro.ingredients.push(ingredient);
+            });
+            receitaQuatro.save();
         });
         
-        // Creating the relationship between steps and the recipe
-        const receitaQuatroIngredientes = await Ingredient.find({recipe: receitaQuatro});
-        receitaQuatroIngredientes.forEach(ingredient => {
-            receitaQuatro.ingredients.push(ingredient);
-        });
-        receitaQuatro.save();
-
-
+        
+        
         // ---------------------------------------------------------
         // Ingredients da Quinta Receita
         // ---------------------------------------------------------
-
+        
         const fifthRecipeIngredients = [
             { name: "1 kg de camarão fresco", recipe: boboDeLagosta.map(record => record._id)},
             { name: "sal a gosto", recipe: boboDeLagosta.map(record => record._id)},
@@ -358,41 +377,26 @@ async function seedDB() {
             { name: "2 pimentões verdes bem picadinhos", recipe: boboDeLagosta.map(record => record._id)},
             { name: "2 colheres (sopa) de azeite de dendê", recipe: boboDeLagosta.map(record => record._id)}
         ]
-
-        conn.collection("ingredients").insertMany(fifthRecipeIngredients, function(err, r) {
+        
+        conn.collection("ingredients").insertMany(fifthRecipeIngredients, async function(err, r) {
             if (err) throw err;
+            // Creating the relationship between steps and the recipe
+            const receitaCincoIngredientes = await Ingredient.find({recipe: receitaCinco});
+            receitaCincoIngredientes.forEach(ingredient => {
+                receitaCinco.ingredients.push(ingredient);
+            });
+            receitaCinco.save();
+            
         });
         
-        // Creating the relationship between steps and the recipe
-        const receitaCincoIngredientes = await Ingredient.find({recipe: receitaCinco});
-        receitaCincoIngredientes.forEach(ingredient => {
-            receitaCinco.ingredients.push(ingredient);
-        });
-        receitaCinco.save();
-
         
-
-
+        
+        
         console.log("done");
-        
-        // ----------------------------
-        // Criando os Chefs
-        // ----------------------------
-        console.log("Creating the Chefs...")
-        const users = [
-            { name: "Chef Fogaça", email: "fogaca@cocobambu.com", password: "12345678" },
-            { name: "Chef Jaquin", email: "jaquin@cocobambu.com", password: "12345678" },
-            { name: "Chef Paola", email: "paola@cocobambu.com", password: "12345678" }
-        ];
-        conn.collection("users").insertMany(users, function (err, r) {
-            if (err) throw err;
-        })
-        await User.find(function (err, item) {
-            if (err) throw err;
-            console.log(`Chefs: ${item}`)
+
+        setTimeout(() => {
             conn.close();
-        });
-        console.log("Done")
+        }, 3000);
     }
     catch (err) {
         console.log(err.message);
