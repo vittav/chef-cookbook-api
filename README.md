@@ -11,26 +11,25 @@ A small project using NodeJS and MongoDB
 - Execute o comando `node seeder/seed.js` para popular a database com usuários e receitas
 Três chefs serão criados, escolha um (ou todos) para testar a funcionalidade de login:
 
-[
   {
     name: 'Chef Fogaça',
     email: 'fogaca@cocobambu.com',
-    password: '12345678',
-    _id: 60b7205a2e2440008be74334
+    password: '12345678'
   },
+  
+  
   {
     name: 'Chef Jaquin',
     email: 'jaquin@cocobambu.com',
-    password: '12345678',
-    _id: 60b7205a2e2440008be74335
+    password: '12345678'
   },
+  
+  
   {
     name: 'Chef Paola',
     email: 'paola@cocobambu.com',
-    password: '12345678',
-    _id: 60b7205a2e2440008be74336
+    password: '12345678'
   }
-]
 
 - Após realizar o seed, abra o servidor com o comando `nodemon`
 
@@ -46,7 +45,7 @@ Três chefs serão criados, escolha um (ou todos) para testar a funcionalidade d
   retornará detalhes de uma receita específica
 
 #### POST localhost:8080/api/login, body: {email: <EMAIL_DO_USUÁRIO>, password: <SENHA_DO_USUÁRIO>}
-  realizará o login do usuário e retornará os dados do usuário logado assim como seu Token
+  realizará o login do usuário e retornará os dados do usuário logado assim como seu Token. **Use as credenciais informadas acima**.
 
 `Para todos os requests acima, um header simples contendo { Content-Type:application/json } é o suficiente.`
 
