@@ -27,10 +27,11 @@ exports.index = function (req, res) {
 
 // Handle view recipe info
 exports.view = function (req, res) {
-    let query = Recipe.find({ _id: req.params.recipe_id });
+    let query = Recipe.findOne({ _id: req.params.recipe_id });
     query.populate({path: 'ingredients', model: Ingredients});
     query.populate({path: 'steps', model: Steps});
     query.exec(function (err, recipe){
+        console.log(recipe);
         if (err) {
             console.log(err)
             res.json({
